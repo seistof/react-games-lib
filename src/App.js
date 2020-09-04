@@ -7,29 +7,32 @@ import Info from './components/info/Info';
 
 function App() {
   const [list, setList] = useState([]);
-  const [game, setGame] = useState([]);
   const [query, setQuery] = useState('');
+  const [queryType, setQueryType] = useState('search');
 
   useEffect(() => {
-    console.log('getList();');
     const getList = async () => {
-      const response = await fetch(`https://api.rawg.io/api/games?page_size=10&search=${query}`);
+      const response = await fetch(`https://api.rawg.io/api/games?page_size=10&${queryType}=${query}`);
+      console.log(`https://api.rawg.io/api/games?page_size=10&${queryType}=${query}`);
       const data = await response.json();
       setList(data.results);
-      console.log(data.results);
+      console.log(data);
+      const container = document.querySelector('#list') || document.body;
+      container.scrollTop = 0;
     };
     getList();
-  }, [query]);
+  }, [query, queryType]);
 
   return (
     <Router>
       <div className={'app'}>
-        <Nav setQuery={setQuery}/>
+        <Nav setQuery={setQuery} setQueryType={setQueryType}/>
         <Switch>
-          <Route path={'/'} exact render={(props) => <List {...props} list={list}/>}/>
+          <Route path={'/'} exact
+                 render={(props) => <List {...props} list={list} setQuery={setQuery} setQueryType={setQueryType}/>}/>
           <Route path={'/:id'} exact component={Info}/>
         </Switch>
-        <div className={'footer'}>©</div>
+        <div className={'footer'}><a href="https://github.com/seistof" target={'_blanc'}>©</a></div>
       </div>
     </Router>
   );
@@ -37,5 +40,5 @@ function App() {
 
 export default App;
 
-//https://api.rawg.io/api/games%3Fpage_size=5&search=skyrim
 //https://api.rawg.io/api/games?page_size=5&search=skyrim
+//https://api.rawg.io/api/games?page_size=5&tags=2d

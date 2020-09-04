@@ -4,28 +4,57 @@ import metacritic from './metacritic.png';
 import {Link} from 'react-router-dom';
 import uuid from 'uuid/dist/v4';
 
-function Item({data}) {
+function Item({data, setQuery, setQueryType}) {
+
+  const handleTagOnClick = (e) => {
+    setQueryType('tags');
+    setQuery(e.target.textContent.replace('#', ''));
+  };
+
+  const handleGengreOnClick = (e) => {
+    setQueryType('genres');
+    setQuery(e.target.getAttribute('slug'));
+  };
 
   return (
-    <Link to={`/${data.id}`} className={style.wrapper} game={data}>
+    <div className={style.wrapper}>
       <div className={style.item}>
         <div className={style.top}>
           <div className={style.left}>
             <p className={style.title}>{data.name}</p>
-            <p>{data.genres.map(genre => (genre.name)).join(', ')}</p>
-            <p className={style.rating}><img src={metacritic} alt="metacritic"/>{data.metacritic}</p>
+            {
+              data.genres.length !== 0
+                ?
+                <p className={style.genre}>{data.genres.map(genre => (<span slug={genre.slug} key={uuid()}
+                                                                            onClick={handleGengreOnClick}>{`${genre.name}`}<br/></span>))}</p>
+                :
+                <p className={style.genre}>No genre data</p>
+            }
+            {
+              data.metacritic !== null
+                ? <p className={style.rating}><img src={metacritic} alt="metacritic"/>{`${data.metacritic}/100`}</p>
+                : <p className={style.rating}>No rating data</p>
+            }
+            <Link to={`/${data.id}`} className={style.details}>
+              <button>Details</button>
+            </Link>
           </div>
           <div className={style.right}>
-            <img src={data.background_image} alt=""/>
+            <img src={data.background_image} alt="game art"/>
           </div>
         </div>
-        <p>Platform: <span className={style.platform}>{data.parent_platforms.map(
-          platform => `${platform.platform.name}`).join(', ')}</span>
-        </p>
-        <p className={style.tags}>Tags: <span>{data.tags.map(tag => `#${tag.name} `)}</span>
+        {
+          data.parent_platforms.length !== 0
+            ? <p className={style.platform}>{data.parent_platforms.map(platform => `${platform.platform.name}`).join(', ')}</p>
+            : <p className={style.platform}>No platform data</p>
+        }
+        <p className={style.tags}>
+          {data.tags.map(tag => (
+            <span key={uuid()} onClick={handleTagOnClick}>{`#${tag.slug} `}</span>
+          ))}
         </p>
       </div>
-    </Link>
+    </div>
   );
 }
 

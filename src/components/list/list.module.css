@@ -3,5 +3,5 @@
     height: 85vh;
     overflow: auto;
     padding: 5px 0;
-
+    transition: 1s;
 }

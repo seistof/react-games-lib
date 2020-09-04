@@ -12,6 +12,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #396D89;
+    background: #5887A1;
+}
+
+.footer > a {
+    font-weight: bold;
     color: #fff;
+    font-size: 1.5rem;
+}
+
+.footer > a:hover {
+    color: #ff9d50;
+    font-size: 1.5rem;
 }

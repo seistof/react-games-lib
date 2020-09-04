@@ -1,14 +1,12 @@
 import React from 'react';
 import Item from './item/Item';
 import style from './list.module.css';
-import uuid from 'uuid/dist/v4';
 
-function List({list}) {
-  console.log(list);
+function List({list, setQuery, setQueryType}) {
   return (
-    <div className={style.list}>
+    <div className={style.list} id={'list'}>
       {list.map(item => (
-        <Item key={item.id} data={item}/>
+        <Item key={item.id} data={item} setQuery={setQuery} setQueryType={setQueryType}/>
       ))}
     </div>
   );
