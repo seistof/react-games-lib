@@ -13,10 +13,8 @@ function App() {
   useEffect(() => {
     const getList = async () => {
       const response = await fetch(`https://api.rawg.io/api/games?page_size=10&${queryType}=${query}`);
-      console.log(`https://api.rawg.io/api/games?page_size=10&${queryType}=${query}`);
       const data = await response.json();
       setList(data.results);
-      console.log(data);
       const container = document.querySelector('#list') || document.body;
       container.scrollTop = 0;
     };

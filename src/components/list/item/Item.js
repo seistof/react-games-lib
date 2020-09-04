@@ -44,8 +44,10 @@ function Item({data, setQuery, setQueryType}) {
           </div>
         </div>
         {
-          data.parent_platforms.length !== 0
-            ? <p className={style.platform}>{data.parent_platforms.map(platform => `${platform.platform.name}`).join(', ')}</p>
+          data.parent_platforms
+            ? data.parent_platforms.length !== 0
+              ? <p className={style.platform}>{data.parent_platforms.map(platform => `${platform.platform.name}`).join(', ')}</p>
+              : <p className={style.platform}>No platform data</p>
             : <p className={style.platform}>No platform data</p>
         }
         <p className={style.tags}>

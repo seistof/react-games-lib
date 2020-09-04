@@ -24,7 +24,7 @@ function Info({match}) {
       const response = await fetch(`https://api.rawg.io/api/games/${match.params.id}`);
       const data = await response.json();
       setGame(data);
-      console.log(data);
+      // console.log(data);
     };
     getData();
   }, [match.params.id]);
@@ -40,9 +40,6 @@ function Info({match}) {
 
   let imageIndex = -1;
   const handleNextOnClick = () => {
-    console.log('Next();');
-    console.log(`ImageIndex: ${imageIndex}`);
-
     const images = document.querySelectorAll('.frame img');
     if (imageIndex === images.length - 1) {
       imageIndex = 0;
@@ -51,8 +48,6 @@ function Info({match}) {
     }
     images.forEach((image, index) => {
       if (index === imageIndex) {
-        console.log(`Index: ${index}`);
-        console.log(`?${index === imageIndex}`);
         image.style.display = 'block';
       } else {
         image.style.display = 'none';

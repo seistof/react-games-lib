@@ -43,7 +43,7 @@ function Nav({setQuery, setQueryType}) {
             value={search}
             onChange={handleSearchOnChange}
           />
-          <button type={'submit'} onClick={handleSearchOnClick}>Search</button>
+          <button type={'submit'}>Search</button>
         </form>
       <Link to={'/'}>
         <button>Back</button>
