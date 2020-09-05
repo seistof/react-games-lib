@@ -11,14 +11,14 @@ function Item({data, setQuery, setQueryType}) {
     setQuery(e.target.textContent.replace('#', ''));
   };
 
-  const handleGengreOnClick = (e) => {
+  const handleGenreOnClick = (e) => {
     setQueryType('genres');
     setQuery(e.target.getAttribute('slug'));
   };
 
   return (
     <div className={style.wrapper}>
-      <div className={style.item}>
+      <div className={style.item} id={'item'}>
         <div className={style.top}>
           <div className={style.left}>
             <p className={style.title}>{data.name}</p>
@@ -26,7 +26,7 @@ function Item({data, setQuery, setQueryType}) {
               data.genres.length !== 0
                 ?
                 <p className={style.genre}>{data.genres.map(genre => (<span slug={genre.slug} key={uuid()}
-                                                                            onClick={handleGengreOnClick}>{`${genre.name}`}<br/></span>))}</p>
+                                                                            onClick={handleGenreOnClick}>{`${genre.name}`}<br/></span>))}</p>
                 :
                 <p className={style.genre}>No genre data</p>
             }

@@ -16,12 +16,18 @@
 }
 
 .footer > a {
-    font-weight: bold;
-    color: #fff;
-    font-size: 1.5rem;
+    height: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.footer > a:hover {
-    color: #ff9d50;
-    font-size: 1.5rem;
+.footer > a > img {
+    height: 85%;
+}
+
+.footer > a > img:hover {
+    filter: drop-shadow(0px 5px 15px #ffffff);
 }

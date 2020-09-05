@@ -1,3 +1,14 @@
+.info {
+    position: relative;
+    width: 100vw;
+    height: 85vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .screenshot-active {
     display: block;
     height: 35vh;

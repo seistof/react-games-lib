@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import List from './components/list/List';
 import Info from './components/info/Info';
+import github from './github.svg';
 
 function App() {
   const [list, setList] = useState([]);
@@ -26,11 +27,25 @@ function App() {
       <div className={'app'}>
         <Nav setQuery={setQuery} setQueryType={setQueryType}/>
         <Switch>
-          <Route path={'/'} exact
-                 render={(props) => <List {...props} list={list} setQuery={setQuery} setQueryType={setQueryType}/>}/>
+          <Route
+            path={'/'}
+            exact
+            render={(props) =>
+              <List {...props}
+                    list={list}
+                    query={query}
+                    setQuery={setQuery}
+                    setQueryType={setQueryType}
+              />
+            }
+          />
           <Route path={'/:id'} exact component={Info}/>
         </Switch>
-        <div className={'footer'}><a href="https://github.com/seistof" target={'_blanc'}>©</a></div>
+        <div className={'footer'}>
+          <a href="https://github.com/seistof" target={'_blanc'}>
+            <img src={github} alt="github"/>
+          </a>
+        </div>
       </div>
     </Router>
   );

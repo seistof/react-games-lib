@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import uuid from 'uuid/dist/v4'
+import uuid from 'uuid/dist/v4';
 import style from './info.module.css';
 import './style.css';
 
@@ -16,6 +16,7 @@ const displayBlock = {
 };
 
 function Info({match}) {
+
   const [game, setGame] = useState([]);
   const [screenshots, setScreenshots] = useState([]);
 
@@ -24,11 +25,9 @@ function Info({match}) {
       const response = await fetch(`https://api.rawg.io/api/games/${match.params.id}`);
       const data = await response.json();
       setGame(data);
-      // console.log(data);
     };
     getData();
   }, [match.params.id]);
-
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(`https://api.rawg.io/api/games/${match.params.id}/screenshots`);
@@ -38,7 +37,7 @@ function Info({match}) {
     getData();
   }, [match.params.id]);
 
-  let imageIndex = -1;
+  let imageIndex = 0;
   const handleNextOnClick = () => {
     const images = document.querySelectorAll('.frame img');
     if (imageIndex === images.length - 1) {
@@ -72,7 +71,7 @@ function Info({match}) {
   };
 
   return (
-    <div className={style.info}>
+    <div className={'info'}>
       <div className={style.top}>
         <div className={style.topLeft}>
           <p className={style.title}>{game.name}</p>
@@ -84,7 +83,7 @@ function Info({match}) {
               {screenshots.map((screenshot, index) => (
                 <img
                   key={uuid()}
-                  style={index === 1 ? displayBlock : displayNone}
+                  style={index === 0 ? displayBlock : displayNone}
                   src={screenshot.image}
                   alt="screenshot"
                 />
