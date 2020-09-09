@@ -24,11 +24,8 @@ function Item({data, setQuery, setQueryType}) {
             <p className={style.title}>{data.name}</p>
             {
               data.genres.length !== 0
-                ?
-                <p className={style.genre}>{data.genres.map(genre => (<span slug={genre.slug} key={uuid()}
-                                                                            onClick={handleGenreOnClick}>{`${genre.name}`}<br/></span>))}</p>
-                :
-                <p className={style.genre}>No genre data</p>
+                ? <p className={style.genre}>{data.genres.map(genre => (<span slug={genre.slug} key={uuid()} onClick={handleGenreOnClick}>{`${genre.name}`}<br/></span>))}</p>
+                : <p className={style.genre}>No genre data</p>
             }
             {
               data.metacritic !== null
